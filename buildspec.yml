@@ -1,0 +1,41 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - echo "Installing AWS CDK CLI..."
+      - npm install -g aws-cdk
+      - echo "Changing into backend directory"
+      - cd backend
+      - echo "Installing npm dependencies"
+      - npm ci
+
+  pre_build:
+    commands:
+      - echo "Building TypeScript sources"
+      - npm run build
+      - echo "Bootstrapping CDK (no approval)..."
+      - cdk bootstrap --require-approval never -c knowledgeBaseId=$KNOWLEDGE_BASE_ID -c githubOwner=$GITHUB_OWNER -c githubRepo=$GITHUB_REPO -c documentsBucketName=$DOCUMENTS_BUCKET || true
+
+  build:
+    commands:
+      - echo "Deploying CDK stack..."
+      - cdk deploy --require-approval never -c knowledgeBaseId=$KNOWLEDGE_BASE_ID -c githubOwner=$GITHUB_OWNER -c githubRepo=$GITHUB_REPO -c documentsBucketName=$DOCUMENTS_BUCKET
+
+  post_build:
+    commands:
+      - echo ""
+      - echo "🚀 BACKEND DEPLOYMENT COMPLETE! 🚀"
+      - echo "Backend infrastructure is now live!"
+      - echo ""
+      - echo "📋 Backend Deployment Summary:"
+      - API_URL=$(aws cloudformation describe-stacks --stack-name AgentFargateStack --query 'Stacks[0].Outputs[?OutputKey==`ExportApiGatewayUrl`].OutputValue' --output text 2>/dev/null)
+      - AMPLIFY_URL=$(aws cloudformation describe-stacks --stack-name AgentFargateStack --query 'Stacks[0].Outputs[?OutputKey==`ExportAmplifyAppUrl`].OutputValue' --output text 2>/dev/null)
+      - AMPLIFY_APP_ID=$(aws cloudformation describe-stacks --stack-name AgentFargateStack --query 'Stacks[0].Outputs[?OutputKey==`ExportAmplifyAppId`].OutputValue' --output text 2>/dev/null)
+      - echo "   🌐 API Gateway:" $API_URL
+      - echo "   📱 Amplify App ID:" $AMPLIFY_APP_ID
+      - echo "   🔗 Frontend URL:" https://main.$AMPLIFY_URL
+      - echo ""
+      - echo "✅ Backend ready! Frontend deployment will follow..."
