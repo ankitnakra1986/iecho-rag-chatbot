@@ -57,7 +57,7 @@ Screens and flows: [`docs/userGuide.md`](./docs/userGuide.md) · media in [`docs
 ## Results that mattered
 
 - **96% exact-match accuracy** on a curated golden set built with in-house SMEs
-- **About $6,000/year** run-rate vs roughly **$36,000/year** for ChatGPT Enterprise (about one-sixth the cost)
+- **About $6,000/year** estimated run-rate vs roughly **$36,000/year** for ChatGPT Enterprise (about one-sixth the cost; estimate)
 - Steady-state run-rate from the AWS CIC discovery workshop: about **$5,538/year** (~$462/month); Nova Lite inference about **$28.50/month**. One-time ingestion for a large corpus was separate (~$14K for ~60K docs). State the one-time number only when someone asks about TCO.
 - AWS Seattle shared results internally. Their Global AVP visited the India office, took notes, and asked for a demo at an AWS India event.
 
@@ -77,7 +77,7 @@ External validation: Arun Anachalam (AWS, ASU CIC collaboration) later wrote pub
 3. Made the hard calls: S3 Vector for embeddings, Bedrock + Titan, model comparison on accuracy and cost (AWS, Hugging Face, and third-party eval tools).
 4. Built golden test sets with SMEs. Exact-match validation, not vibes. Defined targets: >90% accuracy (hit 96%), <2s response, <10% fallback. Eval mix: confusion matrix, human-in-the-loop, LLM-as-judge.
 
-**Result.** 96% accuracy at about $6K/year. AWS AVP flew to India. Asked for a public reference demo.
+**Result.** 96% accuracy on the golden set, at an estimated $6K/year. AWS AVP flew to India. Asked for a public reference demo.
 
 **What happened next.** There was pressure to productionalize immediately. I pushed back. We needed PHI/PII filtering, consent architecture, and multilingual support before scaling. The tech was ready. The org was not fully ready for compliance and sponsorship. That is part of the story, not a footnote. Accuracy without adoption is still unfinished product work.
 
@@ -139,6 +139,6 @@ git clone https://github.com/ASUCICREPO/IECHO-RAG-CHATBOT.git
 ## Portfolio note
 
 **Ankit Nakra** — Product & AI Leader  
-[LinkedIn](https://linkedin.com/in/ankitnakra) · [GitHub](https://github.com/ankitnakra1986)
+[LinkedIn](https://www.linkedin.com/in/ankitnakra) · [GitHub](https://github.com/ankitnakra1986)
 
 This mirror exists so hiring managers can see the system, the decisions, and the metrics in one place, with full credit to the people who wrote the production code.
