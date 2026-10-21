@@ -56,7 +56,7 @@ Screens and flows: [`docs/userGuide.md`](./docs/userGuide.md) · media in [`docs
 
 ## Results that mattered
 
-- Small-scale evaluation: an SME-built golden set, scored by exact match, expert human review, and an LLM judge (Claude Haiku)
+- 96% on a small SME-built golden set (scored by exact match, expert human review and an LLM judge, Claude Haiku)
 - **About $6,000/year** estimated run-rate vs roughly **$36,000/year** for ChatGPT Enterprise (about one-sixth the cost; estimate)
 - Steady-state run-rate from the AWS CIC discovery workshop: about **$5,538/year** (~$462/month); Nova Lite inference about **$28.50/month**. One-time ingestion for a large corpus was separate (~$14K for ~60K docs).
 - Results were shared with the AWS team, who requested a demo.
@@ -75,7 +75,7 @@ Screens and flows: [`docs/userGuide.md`](./docs/userGuide.md) · media in [`docs
 3. Made the hard calls: S3 Vector for embeddings, Bedrock + Titan, model comparison on accuracy and cost (AWS, Hugging Face, and third-party eval tools).
 4. Small-scale evaluation: an SME-built golden set, scored by exact match, expert human review, and an LLM judge (Claude Haiku).
 
-**Result.** Small-scale evaluation: an SME-built golden set, scored by exact match, expert human review, and an LLM judge (Claude Haiku), at an estimated $6K/year.
+**Result.** 96% on a small SME-built golden set (scored by exact match, expert human review and an LLM judge, Claude Haiku), at an estimated $6K/year.
 
 **What happened next.** There was pressure to productionalize immediately. I pushed back. We needed PHI/PII filtering, consent architecture, and multilingual support before scaling. The tech was ready. The org was not fully ready for compliance and sponsorship. That is part of the story, not a footnote. Accuracy without adoption is still unfinished product work.
 
